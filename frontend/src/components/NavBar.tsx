@@ -1,5 +1,8 @@
 import { Component } from "solid-js"
 
 export const NavBar: Component = () => {
-    return <></>
+    return <>
+        <h1>To-Do List</h1>
+        <ProfileIcon />
+    </>
 }
