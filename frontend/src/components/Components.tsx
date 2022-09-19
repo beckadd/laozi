@@ -8,4 +8,5 @@ export { NewTask } from "./NewTask";
 export { DetailPane } from "./DetailPane";
 export { NavBar } from "./NavBar";
 export { TodoSelectPane } from "./TodoSelectPane";
-export { ListContext } from "./ContextManager";
+export { ListContext, ListContextProvider } from "./ContextManager";
+

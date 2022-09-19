@@ -6,25 +6,20 @@ import {
   TodoSelectPane,
   TodoList,
   DetailPane,
-  NewTask,
-  ListContext,
+  NewTask
 } from "./components/Components";
+import { ListContextProvider } from "./components/ContextManager";
 
 const App: Component = () => {
   return (
     <div>
-      {/* Top Navbar and Title */}
       <NavBar />
-      <ListContext>
-        {/* Select Todo List */}
+      <ListContextProvider>
         <TodoSelectPane />
-        {/* Detail Pane Component */}
         <DetailPane />
-        {/* Todo List view Component (?) */}
         <TodoList />
-        {/* Enter new Task Component */}
         <NewTask />
-      </ListContext>
+      </ListContextProvider>
     </div>
   );
 };
