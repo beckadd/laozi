@@ -1,5 +1,8 @@
-import { Component } from "solid-js"
+import { Component, useContext } from "solid-js";
+import { TodoList } from "../models";
+import { ListContext } from "./ContextManager";
 
 export const DetailPane: Component = () => {
-    return <></>
-}
+  const list = useContext<TodoList>(ListContext);
+  return <></>;
+};
