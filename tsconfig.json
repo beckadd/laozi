@@ -4,12 +4,20 @@
     "target": "ESNext",
     "module": "ESNext",
     "moduleResolution": "node",
+		"lib": ["ESNext", "DOM"],
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "jsx": "preserve",
     "jsxImportSource": "solid-js",
     "types": ["vite/client"],
     "noEmit": true,
-    "isolatedModules": true
-  }
+    "isolatedModules": true,
+    "noImplicitReturns": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"resolveJsonModule": true,
+		"sourceMap": true,
+		"useDefineForClassFields": true,
+  },
+  "include": ["./src"]
 }

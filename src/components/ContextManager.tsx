@@ -2,9 +2,19 @@ import { Component, Context, createContext, createSignal, JSX } from "solid-js";
 import { createStore } from "solid-js/store";
 import { TodoList, TodoItem } from "../models";
 
-const example: TodoList = {};
+const example = [
+  {
+    name: "Hello world",
+    body: "This is a todo-list item."
+  },
+  {
+    name: "Todo item 2",
+    body: "This is another todo-list item."
+  }
+];
 
-export const ListContext: Context<TodoList> = createContext(example);
+// Need to specify this as a TodoList once I get it together
+export const ListContext: Context<any[]> = createContext(example);
 
 export const ListContextProvider: Component<{
   todo_list?: TodoList;
@@ -33,6 +43,10 @@ export const ListContextProvider: Component<{
      */
     /*setTodoList(todoList.items.append(task))*/
   };
+
+  const editTask: TodoItem = (task: TodoItem) => {
+    
+  }
 
   return (
     <>

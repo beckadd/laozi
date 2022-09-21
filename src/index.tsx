@@ -8,5 +8,5 @@ render(
   () => (
       <App />
   ),
-  document.getElementById("app") as HTMLElement
+  document.getElementById("root") as HTMLElement
 );
