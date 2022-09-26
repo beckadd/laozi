@@ -24,7 +24,8 @@
     "vite": "^3.0.9",
     "vite-plugin-solid": "^2.3.0",
     "storybook-builder-vite": "0.1.13",
-    "@storybook/html": "^6.1.21"
+    "@storybook/html": "^6.1.21",
+    "yarn": "^1.22.19"
   },
   "dependencies": {
     "solid-js": "^1.5.1"
