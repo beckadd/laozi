@@ -1,4 +1,5 @@
 import { Component } from "solid-js"
+import { ProfileIcon } from "./ProfileIcon"
 
 export const NavBar: Component = () => {
     return <>

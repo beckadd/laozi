@@ -1,26 +1,34 @@
-import { Component, Context, createContext, createSignal, JSX } from "solid-js";
+import {
+  Component,
+  Context,
+  createContext,
+  createSignal,
+  JSX,
+  useContext,
+} from "solid-js";
 import { createStore } from "solid-js/store";
-import { TodoList, TodoItem } from "../models";
+// import { TodoList, TodoItem } from "../models";
+import { EXAMPLE_USER, EXAMPLE_TODOLIST } from '../testing/example_data';
 
-const example = [
-  {
-    name: "Hello world",
-    body: "This is a todo-list item."
-  },
-  {
-    name: "Todo item 2",
-    body: "This is another todo-list item."
-  }
-];
+type TodoItem = { name: string; description: string };
+type TodoList = TodoItem[];
+type User = {
+  name: string;
+  profileImg: string;
+};
 
 // Need to specify this as a TodoList once I get it together
-export const ListContext: Context<any[]> = createContext(example);
+export const ListContext: Context = createContext();
 
 export const ListContextProvider: Component<{
-  todo_list?: TodoList;
+  todo_list: TodoList;
   children?: JSX.Element | JSX.Element[];
 }> = (props) => {
-  const [todoList, setTodoList] = createStore(props.todo_list);
+  const debug = useContext(DebugContext);
+
+  const [todoList, setTodoList] = createStore<TodoList>(
+    debug ? EXAMPLE_TODOLIST : props.todo_list
+  );
 
   /**
    * When todoIdx == -1, no item is currently selected.
@@ -31,28 +39,61 @@ export const ListContextProvider: Component<{
   const currentTodo /*: *TodoItem?*/ = () => {
     /**
      * Convenience method to get the TodoItem instead of having to index the todolist.
-     * TODO: This is just pseudocode at this point
      */
-    return todoIdx() == -1 ? null : null; /*todoList[todoIdx()]*/
+    return todoIdx() == -1 ? null : todoList[todoIdx()];
   };
 
-  const addTask: TodoList = (task: TodoItem) => {
+  const addTask = (task: TodoItem): TodoList => {
     /**
      * Convenience method to add a task to the current TodoList.
-     * TODO: this is just pseudocode at this point
      */
-    /*setTodoList(todoList.items.append(task))*/
+
+    setTodoList([...todoList, task]);
+    return todoList;
   };
 
-  const editTask: TodoItem = (task: TodoItem) => {
-    
-  }
+  // const editTask: TodoItem = ({name: string, description: string}: TodoItem) => {
+  //     return {name, description};
+  // }
 
   return (
     <>
-      <ListContext.Provider value={[todoList, setTodoIdx, currentTodo]}>
+      <ListContext.Provider
+        value={[{ todoList, setTodoIdx, currentTodo }, addTask]}
+      >
         {props.children}
       </ListContext.Provider>
+    </>
+  );
+};
+
+export const UserContext: Context<User | undefined> = createContext();
+
+export const UserContextProvider: Component<{
+  children?: JSX.Element | JSX.Element[];
+}> = (props) => {
+  const debug = useContext(DebugContext);
+
+  return (
+    <>
+      <UserContext.Provider value={debug ? EXAMPLE_USER : null}>
+        {props.children}
+      </UserContext.Provider>
+    </>
+  );
+};
+
+export const DebugContext: Context<boolean> = createContext(false);
+
+export const DebugContextProvider: Component<{
+  debug: boolean;
+  children?: JSX.Element | JSX.Element[];
+}> = (props) => {
+  return (
+    <>
+      <DebugContext.Provider value={props.debug}>
+        {props.children}
+      </DebugContext.Provider>
     </>
   );
 };
